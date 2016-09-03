@@ -1,10 +1,16 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@page import="kr.co.saramin.mysite.vo.GuestbookVo" %>
+<%@page import="java.util.List"%>
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html>
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="<%=request.getContextPath() %>/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -36,16 +42,20 @@
 					</table>
 				</form>
 				<ul>
+				<c:set var="count" value="${fn:length(list) }"/>	
+				<c:forEach items="${list}" var = "vo" varStatus="status">
 					<li>
 						<table>
 							<tr>
-								<td>[4]</td>
-								<td>안대혁</td>
-								<td>2015-11-10 11:22:30</td>
-								<td><a href="">삭제</a></td>
+								<td>${count - status.index }</td>
+								<td>${vo.name }</td>
+								<td>${vo.regDate}</td>
+								<td><a href="guestbook?a=deleteform${vo.no }">삭제</a></td>
 							</tr>
 							<tr>
+								
 								<td colspan=4>
+								${ vo.message}
 								안녕하세요. ^^;<br>
 								하하하하	
 								</td>
@@ -53,6 +63,7 @@
 						</table>
 						<br>
 					</li>
+				</c:forEach>
 				</ul>
 			</div>
 		</div>

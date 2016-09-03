@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%
+	String no = request.getParameter("no");%>
 <!doctype html>
 <html>
 <head>
@@ -20,7 +22,9 @@
 		</div>
 		<div id="content">
 			<div id="guestbook" class="delete-form">
-				<form method="" action="">
+				<form method="post" action="guestbook">
+					<input type="hidden" name="a" value="delete">
+					<input type="hidden" name="no" value="<%=no%>">
 					<label>비밀번호</label>
 					<input type="password" name="password">
 					<input type="submit" value="확인">
